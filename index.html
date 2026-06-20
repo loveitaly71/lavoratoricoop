@@ -262,6 +262,25 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
   <span class="footer-copy">lavoratoricoop.it — progetto indipendente</span>
   <span class="footer-anon">🔒 100% anonimo nel forum</span>
 </div>
+<div class="section" id="forum">
+  <div class="section-header">
+    <span class="section-tag tag-forum">Forum</span>
+    <span class="section-title">Discussioni della community</span>
+  </div>
+  <div id="disqus_thread"></div>
+</div>
 
+<script>
+var disqus_config = function () {
+  this.page.url = 'https://lavoratoricoop.it';
+  this.page.identifier = 'home';
+};
+(function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://lavoratoricoop.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
 </body>
 </html>
