@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LavoratoriCoop.it — Conosci la tua cooperativa</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Space Grotesk', sans-serif; background: #1a0a2e; color: #f0e6ff; min-height: 100vh; }
+
+nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 2px solid #ff6b9d; background: #12071e; }
+.logo { font-family: 'Space Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #ff6b9d; letter-spacing: -1px; }
+.logo span { color: #00f5c4; }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a { color: #c9b8ff; font-size: 0.9rem; text-decoration: none; font-weight: 500; }
+.nav-links a:hover { color: #00f5c4; }
+.nav-btn { background: #ff6b9d; color: #12071e; border: none; padding: 0.5rem 1.2rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+
+.hero { padding: 3.5rem 2rem 3rem; text-align: center; border-bottom: 2px solid #2d1a4e; }
+.hero-badge { display: inline-block; background: #2d1a4e; border: 1px solid #ff6b9d; color: #ff6b9d; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; padding: 0.3rem 0.8rem; border-radius: 2px; margin-bottom: 1.2rem; text-transform: uppercase; }
+.hero h1 { font-family: 'Space Mono', monospace; font-size: 2.4rem; font-weight: 700; line-height: 1.15; color: #f0e6ff; margin-bottom: 1rem; }
+.hero h1 .accent { color: #00f5c4; }
+.hero h1 .accent2 { color: #ff6b9d; }
+.hero-sub { font-size: 1rem; color: #c9b8ff; max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+
+.search-bar { display: flex; max-width: 500px; margin: 0 auto 1.5rem; border: 2px solid #00f5c4; border-radius: 6px; overflow: hidden; }
+.search-bar input { flex: 1; background: #2d1a4e; border: none; padding: 0.8rem 1rem; color: #f0e6ff; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; outline: none; }
+.search-bar input::placeholder { color: #7a6a9e; }
+.search-bar button { background: #00f5c4; color: #12071e; border: none; padding: 0 1.4rem; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+.btn-primary { background: #ff6b9d; color: #12071e; border: none; padding: 0.7rem 1.6rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+.btn-outline { background: transparent; color: #00f5c4; border: 2px solid #00f5c4; padding: 0.65rem 1.6rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 2px solid #2d1a4e; }
+.stat { padding: 1.5rem; text-align: center; border-right: 1px solid #2d1a4e; }
+.stat:last-child { border-right: none; }
+.stat-num { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; color: #00f5c4; }
+.stat-label { font-size: 0.75rem; color: #7a6a9e; letter-spacing: 1px; text-transform: uppercase; margin-top: 0.3rem; }
+
+.section { padding: 2rem; border-bottom: 2px solid #2d1a4e; }
+.section-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.4rem; }
+.section-tag { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 2px; }
+.tag-coop { background: #ff6b9d; color: #12071e; }
+.tag-forum { background: #00f5c4; color: #12071e; }
+.tag-city { background: #c9b8ff; color: #12071e; }
+.section-title { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; color: #f0e6ff; }
+
+.coop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.coop-card { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 6px; padding: 1.1rem; transition: border-color 0.2s; }
+.coop-card:hover { border-color: #ff6b9d; }
+.coop-name { font-weight: 700; font-size: 0.95rem; color: #f0e6ff; margin-bottom: 0.3rem; }
+.coop-city { font-size: 0.78rem; color: #7a6a9e; margin-bottom: 0.7rem; }
+.coop-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.7rem; }
+.pill { font-size: 0.65rem; padding: 0.18rem 0.45rem; border-radius: 2px; font-weight: 700; letter-spacing: 0.5px; }
+.pill-green { background: #003d2e; color: #00f5c4; }
+.pill-red { background: #3d0a0a; color: #ff6b6b; }
+.pill-gray { background: #2d1a4e; color: #7a6a9e; border: 1px solid #3d2a5e; }
+.coop-stars { color: #ffd166; font-size: 0.8rem; margin-bottom: 0.5rem; }
+.coop-link { font-size: 0.75rem; color: #00f5c4; text-decoration: none; }
+
+.thread-list { display: flex; flex-direction: column; gap: 0.7rem; }
+.thread { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 6px; padding: 0.9rem 1.1rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; transition: border-color 0.2s; }
+.thread:hover { border-color: #00f5c4; }
+.thread-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+.av1 { background: #3d0a2e; color: #ff6b9d; }
+.av2 { background: #003d2e; color: #00f5c4; }
+.av3 { background: #1a0a4e; color: #c9b8ff; }
+.av4 { background: #2d1a00; color: #ffd166; }
+.thread-body { flex: 1; min-width: 0; }
+.thread-title { font-size: 0.9rem; font-weight: 500; color: #f0e6ff; margin-bottom: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.thread-meta { font-size: 0.72rem; color: #7a6a9e; }
+.thread-meta span { color: #c9b8ff; }
+.thread-count { text-align: right; flex-shrink: 0; }
+.thread-replies { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; color: #ff6b9d; }
+.thread-replies-label { font-size: 0.65rem; color: #7a6a9e; }
+.forum-cta { margin-top: 1.2rem; text-align: center; }
+
+.city-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.7rem; }
+.city-btn { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 4px; padding: 0.8rem; text-align: center; cursor: pointer; transition: all 0.2s; }
+.city-btn:hover { border-color: #ff6b9d; background: #3d1a3e; }
+.city-name { font-weight: 700; font-size: 0.9rem; color: #f0e6ff; }
+.city-count { font-size: 0.72rem; color: #7a6a9e; margin-top: 0.2rem; }
+
+.about { padding: 2rem; background: #12071e; }
+.about-title { font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; color: #ff6b9d; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.9rem; }
+.about-text { font-size: 0.9rem; color: #c9b8ff; line-height: 1.8; max-width: 600px; }
+
+.footer-bar { background: #0a0312; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2d1a4e; }
+.footer-copy { font-size: 0.75rem; color: #3d2a5e; }
+.footer-anon { font-size: 0.75rem; color: #00f5c4; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.6rem; }
+  .nav-links { display: none; }
+  .stats { grid-template-columns: repeat(3, 1fr); }
+  .stat-num { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">lavoratori<span>coop</span>.it</div>
+  <div class="nav-links">
+    <a href="#">Directory</a>
+    <a href="#">Forum</a>
+    <a href="#">Chi siamo</a>
+  </div>
+  <button class="nav-btn">Iscriviti</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">per chi lavora nel sociale</div>
+  <h1>Conosci<br>la tua <span class="accent">cooperativa</span><br>prima di <span class="accent2">firmare</span></h1>
+  <p class="hero-sub">Directory aggiornata di cooperative sociali, recensioni anonime di chi ci lavora davvero, e un forum libero per confrontarsi.</p>
+  <div class="search-bar">
+    <input type="text" placeholder="Cerca una cooperativa o una città..." />
+    <button>Cerca</button>
+  </div>
+  <div class="hero-actions">
+    <button class="btn-primary">Sfoglia la directory</button>
+    <button class="btn-outline">Vai al forum</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">842</div>
+    <div class="stat-label">Cooperative</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3.1k</div>
+    <div class="stat-label">Recensioni</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">18</div>
+    <div class="stat-label">Città</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-tag tag-coop">Directory</span>
+    <span class="section-title">Cooperative in evidenza</span>
+  </div>
+  <div class="coop-grid">
+    <div class="coop-card">
+      <div class="coop-name">Coop. Sole e Terra</div>
+      <div class="coop-city">📍 Milano</div>
+      <div class="coop-tags">
+        <span class="pill pill-green">Stipendi regolari</span>
+        <span class="pill pill-gray">Sociale</span>
+      </div>
+      <div class="coop-stars">★★★★☆</div>
+      <a class="coop-link" href="#">→ Scheda completa</a>
+    </div>
+    <div class="coop-card">
+      <div class="coop-name">Coop. Nuovi Orizzonti</div>
+      <div class="coop-city">📍 Roma</div>
+      <div class="coop-tags">
+        <span class="pill pill-red">Ritardi pagamenti</span>
+        <span class="pill pill-gray">Disabilità</span>
+      </div>
+      <div class="coop-stars">★★☆☆☆</div>
+      <a class="coop-link" href="#">→ Scheda completa</a>
+    </div>
+    <div class="coop-card">
+      <div class="coop-name">Coop. Il Ponte</div>
+      <div class="coop-city">📍 Napoli</div>
+      <div class="coop-tags">
+        <span class="pill pill-green">CCNL rispettato</span>
+        <span class="pill pill-gray">Minori</span>
+      </div>
+      <div class="coop-stars">★★★★★</div>
+      <a class="coop-link" href="#">→ Scheda completa</a>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-tag tag-forum">Forum</span>
+    <span class="section-title">Discussioni recenti</span>
+  </div>
+  <div class="thread-list">
+    <div class="thread">
+      <div class="thread-avatar av1">OP</div>
+      <div class="thread-body">
+        <div class="thread-title">Coop. Futura Milano non paga da 3 mesi — cosa fare?</div>
+        <div class="thread-meta">da <span>lavoratore_anonimo_47</span> · Milano</div>
+      </div>
+      <div class="thread-count">
+        <div class="thread-replies">24</div>
+        <div class="thread-replies-label">risposte</div>
+      </div>
+    </div>
+    <div class="thread">
+      <div class="thread-avatar av2">OP</div>
+      <div class="thread-body">
+        <div class="thread-title">Quali diritti hai se non ti rinnovano il contratto?</div>
+        <div class="thread-meta">da <span>educatore_roma</span> · Roma</div>
+      </div>
+      <div class="thread-count">
+        <div class="thread-replies">41</div>
+        <div class="thread-replies-label">risposte</div>
+      </div>
+    </div>
+    <div class="thread">
+      <div class="thread-avatar av3">OP</div>
+      <div class="thread-body">
+        <div class="thread-title">Ho trovato una coop seria a Torino — la segnalo qui</div>
+        <div class="thread-meta">da <span>oss_piemonte</span> · Torino</div>
+      </div>
+      <div class="thread-count">
+        <div class="thread-replies">12</div>
+        <div class="thread-replies-label">risposte</div>
+      </div>
+    </div>
+    <div class="thread">
+      <div class="thread-avatar av4">OP</div>
+      <div class="thread-body">
+        <div class="thread-title">Contratto part-time forzato: è legale?</div>
+        <div class="thread-meta">da <span>anonimo_sociale</span> · Napoli</div>
+      </div>
+      <div class="thread-count">
+        <div class="thread-replies">33</div>
+        <div class="thread-replies-label">risposte</div>
+      </div>
+    </div>
+  </div>
+  <div class="forum-cta">
+    <button class="btn-outline" style="font-size:0.85rem; padding:0.5rem 1.4rem">Vai al forum completo</button>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-tag tag-city">Città</span>
+    <span class="section-title">Sfoglia per zona</span>
+  </div>
+  <div class="city-grid">
+    <div class="city-btn"><div class="city-name">Milano</div><div class="city-count">142 coop</div></div>
+    <div class="city-btn"><div class="city-name">Roma</div><div class="city-count">198 coop</div></div>
+    <div class="city-btn"><div class="city-name">Napoli</div><div class="city-count">87 coop</div></div>
+    <div class="city-btn"><div class="city-name">Torino</div><div class="city-count">76 coop</div></div>
+    <div class="city-btn"><div class="city-name">Bologna</div><div class="city-count">63 coop</div></div>
+    <div class="city-btn"><div class="city-name">Firenze</div><div class="city-count">54 coop</div></div>
+    <div class="city-btn"><div class="city-name">Palermo</div><div class="city-count">48 coop</div></div>
+    <div class="city-btn"><div class="city-name">+ altre</div><div class="city-count">aggiungi la tua</div></div>
+  </div>
+</div>
+
+<div class="about">
+  <div class="about-title">Chi siamo e perché esiste questo sito</div>
+  <p class="about-text">LavoratoriCoop.it nasce dalla necessità concreta di chi lavora nel sociale: sapere in anticipo com'è lavorare in una cooperativa, se paga regolarmente, se rispetta i contratti. Qui puoi cercare informazioni, leggere le esperienze di chi ci ha lavorato prima di te, e condividere la tua — in anonimato totale. Il sito è costruito dai lavoratori, per i lavoratori.</p>
+</div>
+
+<div class="footer-bar">
+  <span class="footer-copy">lavoratoricoop.it — progetto indipendente</span>
+  <span class="footer-anon">🔒 100% anonimo nel forum</span>
+</div>
+
+</body>
+</html>
