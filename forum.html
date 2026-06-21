@@ -9,43 +9,32 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Space Grotesk', sans-serif; background: #1a0a2e; color: #f0e6ff; min-height: 100vh; }
-
 nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 2px solid #ff6b9d; background: #12071e; }
 .logo { font-family: 'Space Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #ff6b9d; letter-spacing: -1px; text-decoration: none; }
 .logo span { color: #00f5c4; }
 .nav-links { display: flex; gap: 1.5rem; }
 .nav-links a { color: #c9b8ff; font-size: 0.9rem; text-decoration: none; font-weight: 500; }
 .nav-links a:hover { color: #00f5c4; }
-.nav-btn { background: #ff6b9d; color: #12071e; border: none; padding: 0.5rem 1.2rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
-
-.forum-hero { padding: 2.5rem 2rem; border-bottom: 2px solid #2d1a4e; text-align: center; }
-.forum-hero h1 { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; color: #f0e6ff; margin-bottom: 0.6rem; }
-.forum-hero h1 span { color: #00f5c4; }
-.forum-hero p { color: #c9b8ff; font-size: 0.95rem; max-width: 500px; margin: 0 auto; line-height: 1.7; }
-
+.nav-btn { background: #ff6b9d; color: #12071e; border: none; padding: 0.5rem 1.2rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; text-decoration: none; display: inline-block; }
+.forum-hero { padding: 2.5rem 2rem; border-bottom: 2px solid #2d1a4e; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.forum-hero-text h1 { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; color: #f0e6ff; margin-bottom: 0.5rem; }
+.forum-hero-text h1 span { color: #00f5c4; }
+.forum-hero-text p { color: #c9b8ff; font-size: 0.9rem; max-width: 480px; line-height: 1.6; }
 .forum-rules { margin: 2rem; background: #2d1a4e; border: 1px solid #ff6b9d; border-radius: 6px; padding: 1.2rem 1.5rem; }
 .rules-title { font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; color: #ff6b9d; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; }
 .rules-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-.rules-list li { font-size: 0.85rem; color: #c9b8ff; padding-left: 1rem; position: relative; }
+.rules-list li { font-size: 0.85rem; color: #c9b8ff; padding-left: 1.2rem; position: relative; }
 .rules-list li::before { content: '→'; position: absolute; left: 0; color: #00f5c4; }
-
 .forum-container { padding: 0 2rem 2rem; }
 .forum-section-title { font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; color: #00f5c4; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
-
 #disqus_thread { background: #2d1a4e; border-radius: 6px; padding: 1.5rem; }
-
 .footer-bar { background: #0a0312; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2d1a4e; margin-top: 2rem; }
 .footer-copy { font-size: 0.75rem; color: #3d2a5e; }
 .footer-anon { font-size: 0.75rem; color: #00f5c4; }
-
-@media (max-width: 600px) {
-  .forum-hero h1 { font-size: 1.3rem; }
-  .nav-links { display: none; }
-}
+@media (max-width: 600px) { .nav-links { display: none; } .forum-hero-text h1 { font-size: 1.3rem; } }
 </style>
 </head>
 <body>
-
 <nav>
   <a class="logo" href="index.html">lavoratori<span>coop</span>.it</a>
   <div class="nav-links">
@@ -53,14 +42,14 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
     <a href="forum.html">Forum</a>
     <a href="index.html#chi-siamo">Chi siamo</a>
   </div>
-  <button class="nav-btn">Iscriviti</button>
+  <a class="nav-btn" href="https://disqus.com/profile/signup/" target="_blank">Iscriviti</a>
 </nav>
-
 <div class="forum-hero">
-  <h1>Forum <span>anonimo</span></h1>
-  <p>Racconta la tua esperienza, fai domande, confrontati con altri lavoratori del sociale. Nessuno sa chi sei — solo il tuo nickname.</p>
+  <div class="forum-hero-text">
+    <h1>Forum <span>anonimo</span></h1>
+    <p>Racconta la tua esperienza, fai domande, confrontati con altri lavoratori del sociale. Nessuno sa chi sei — solo il tuo nickname.</p>
+  </div>
 </div>
-
 <div class="forum-rules">
   <div class="rules-title">Regole della community</div>
   <ul class="rules-list">
@@ -71,17 +60,14 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
     <li>Segnala i commenti inappropriati con il tasto "flag"</li>
   </ul>
 </div>
-
 <div class="forum-container">
   <div class="forum-section-title">Discussioni</div>
   <div id="disqus_thread"></div>
 </div>
-
 <div class="footer-bar">
   <span class="footer-copy">lavoratoricoop.it — progetto indipendente</span>
   <span class="footer-anon">🔒 100% anonimo</span>
 </div>
-
 <script>
 var disqus_config = function () {
   this.page.url = 'https://lavoratoricoop.it/forum.html';
@@ -94,6 +80,5 @@ var disqus_config = function () {
   (d.head || d.body).appendChild(s);
 })();
 </script>
-
 </body>
 </html>
