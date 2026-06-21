@@ -9,73 +9,58 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Space Grotesk', sans-serif; background: #1a0a2e; color: #f0e6ff; min-height: 100vh; }
-
 nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 2px solid #ff6b9d; background: #12071e; }
 .logo { font-family: 'Space Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #ff6b9d; letter-spacing: -1px; text-decoration: none; }
 .logo span { color: #00f5c4; }
 .nav-links { display: flex; gap: 1.5rem; }
 .nav-links a { color: #c9b8ff; font-size: 0.9rem; text-decoration: none; font-weight: 500; }
 .nav-links a:hover { color: #00f5c4; }
-.nav-btn { background: #ff6b9d; color: #12071e; border: none; padding: 0.5rem 1.2rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
-
 .hero { padding: 3.5rem 2rem 3rem; text-align: center; border-bottom: 2px solid #2d1a4e; }
 .hero-badge { display: inline-block; background: #2d1a4e; border: 1px solid #ff6b9d; color: #ff6b9d; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; padding: 0.3rem 0.8rem; border-radius: 2px; margin-bottom: 1.2rem; text-transform: uppercase; }
 .hero h1 { font-family: 'Space Mono', monospace; font-size: 2.4rem; font-weight: 700; line-height: 1.15; color: #f0e6ff; margin-bottom: 1rem; }
 .hero h1 .accent { color: #00f5c4; }
 .hero h1 .accent2 { color: #ff6b9d; }
 .hero-sub { font-size: 1rem; color: #c9b8ff; max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
-
 .search-bar { display: flex; max-width: 500px; margin: 0 auto 1.5rem; border: 2px solid #00f5c4; border-radius: 6px; overflow: hidden; }
 .search-bar input { flex: 1; background: #2d1a4e; border: none; padding: 0.8rem 1rem; color: #f0e6ff; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; outline: none; }
 .search-bar input::placeholder { color: #7a6a9e; }
 .search-bar button { background: #00f5c4; color: #12071e; border: none; padding: 0 1.4rem; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
-
 .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
 .btn-primary { background: #ff6b9d; color: #12071e; border: none; padding: 0.7rem 1.6rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-block; }
 .btn-outline { background: transparent; color: #00f5c4; border: 2px solid #00f5c4; padding: 0.65rem 1.6rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-block; }
-
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 2px solid #2d1a4e; }
 .stat { padding: 1.5rem; text-align: center; border-right: 1px solid #2d1a4e; }
 .stat:last-child { border-right: none; }
 .stat-num { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; color: #00f5c4; }
 .stat-label { font-size: 0.75rem; color: #7a6a9e; letter-spacing: 1px; text-transform: uppercase; margin-top: 0.3rem; }
-
 .section { padding: 2rem; border-bottom: 2px solid #2d1a4e; }
-.section-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.4rem; }
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.4rem; }
+.section-header-left { display: flex; align-items: center; gap: 0.6rem; }
 .section-tag { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 2px; }
-.tag-coop { background: #ff6b9d; color: #12071e; }
-.tag-forum { background: #00f5c4; color: #12071e; }
 .tag-city { background: #c9b8ff; color: #12071e; }
+.tag-forum { background: #00f5c4; color: #12071e; }
 .section-title { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; color: #f0e6ff; }
-
+.btn-small { font-size: 0.75rem; padding: 0.35rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 700; background: transparent; color: #ff6b9d; border: 1px solid #ff6b9d; white-space: nowrap; }
+.btn-small:hover { background: #ff6b9d; color: #12071e; }
 .city-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.7rem; }
-.city-btn { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 4px; padding: 0.8rem; text-align: center; cursor: pointer; transition: all 0.2s; text-decoration: none; display: block; }
+.city-btn { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 4px; padding: 0.8rem; text-align: center; transition: all 0.2s; text-decoration: none; display: block; }
 .city-btn:hover { border-color: #ff6b9d; background: #3d1a3e; }
+.city-btn.add { border-style: dashed; border-color: #ff6b9d; }
+.city-btn.add:hover { background: #2d0a1e; }
 .city-name { font-weight: 700; font-size: 0.9rem; color: #f0e6ff; }
 .city-sub { font-size: 0.72rem; color: #7a6a9e; margin-top: 0.2rem; }
-
-.empty-state { text-align: center; padding: 2rem; color: #7a6a9e; font-size: 0.9rem; border: 1px dashed #3d2a5e; border-radius: 6px; }
-.empty-state strong { color: #c9b8ff; display: block; margin-bottom: 0.4rem; font-size: 1rem; }
-
 .forum-preview { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 6px; padding: 1.5rem; text-align: center; }
 .forum-preview p { color: #c9b8ff; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.6; }
-
 .about { padding: 2rem; background: #12071e; }
 .about-title { font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; color: #ff6b9d; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.9rem; }
 .about-text { font-size: 0.9rem; color: #c9b8ff; line-height: 1.8; max-width: 600px; }
-
 .footer-bar { background: #0a0312; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2d1a4e; }
 .footer-copy { font-size: 0.75rem; color: #3d2a5e; }
 .footer-anon { font-size: 0.75rem; color: #00f5c4; }
-
-@media (max-width: 600px) {
-  .hero h1 { font-size: 1.6rem; }
-  .nav-links { display: none; }
-}
+@media (max-width: 600px) { .hero h1 { font-size: 1.6rem; } .nav-links { display: none; } }
 </style>
 </head>
 <body>
-
 <nav>
   <a class="logo" href="index.html">lavoratori<span>coop</span>.it</a>
   <div class="nav-links">
@@ -83,9 +68,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
     <a href="forum.html">Forum</a>
     <a href="#chi-siamo">Chi siamo</a>
   </div>
-  <button class="nav-btn">Iscriviti</button>
 </nav>
-
 <div class="hero">
   <div class="hero-badge">per chi lavora nel sociale</div>
   <h1>Conosci<br>la tua <span class="accent">cooperativa</span><br>prima di <span class="accent2">firmare</span></h1>
@@ -99,63 +82,49 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
     <a class="btn-outline" href="forum.html">Vai al forum</a>
   </div>
 </div>
-
 <div class="stats">
-  <div class="stat">
-    <div class="stat-num">0</div>
-    <div class="stat-label">Cooperative</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">0</div>
-    <div class="stat-label">Recensioni</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">8</div>
-    <div class="stat-label">Città</div>
-  </div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-label">Cooperative</div></div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-label">Recensioni</div></div>
+  <div class="stat"><div class="stat-num">7</div><div class="stat-label">Città</div></div>
 </div>
-
 <div class="section" id="directory">
   <div class="section-header">
-    <span class="section-tag tag-city">Directory</span>
-    <span class="section-title">Sfoglia per città</span>
+    <div class="section-header-left">
+      <span class="section-tag tag-city">Directory</span>
+      <span class="section-title">Sfoglia per città</span>
+    </div>
+    <a class="btn-small" href="https://docs.google.com/forms/d/e/1FAIpQLScB3iJIX0zL6sBxBFrRuVRmksCD92bCo_WLNvfO2Ah1wg4yuA/viewform" target="_blank">+ Segnala una coop</a>
   </div>
   <div class="city-grid">
-    <a class="city-btn" href="#"><div class="city-name">Milano</div><div class="city-sub">Clicca per esplorare</div></a>
-    <a class="city-btn" href="#"><div class="city-name">Roma</div><div class="city-sub">Clicca per esplorare</div></a>
-    <a class="city-btn" href="#"><div class="city-name">Napoli</div><div class="city-sub">Clicca per esplorare</div></a>
-    <a class="city-btn" href="#"><div class="city-name">Torino</div><div class="city-sub">Clicca per esplorare</div></a>
-    <a class="city-btn" href="#"><div class="city-name">Bologna</div><div class="city-sub">Clicca per esplorare</div></a>
-    <a class="city-btn" href="#"><div class="city-name">Firenze</div><div class="city-sub">Clicca per esplorare</div></a>
-    <a class="city-btn" href="#"><div class="city-name">Palermo</div><div class="city-sub">Clicca per esplorare</div></a>
-    <a class="city-btn" href="#"><div class="city-name">+ Aggiungi</div><div class="city-sub">la tua città</div></a>
-  </div>
-  <div class="empty-state" style="margin-top:1.2rem">
-    <strong>La directory è in costruzione</strong>
-    Conosci una cooperativa? Segnalacela nel forum — la aggiungeremo insieme.
+    <a class="city-btn" href="milano.html"><div class="city-name">Milano</div><div class="city-sub">Clicca per esplorare</div></a>
+    <a class="city-btn" href="roma.html"><div class="city-name">Roma</div><div class="city-sub">Clicca per esplorare</div></a>
+    <a class="city-btn" href="napoli.html"><div class="city-name">Napoli</div><div class="city-sub">Clicca per esplorare</div></a>
+    <a class="city-btn" href="torino.html"><div class="city-name">Torino</div><div class="city-sub">Clicca per esplorare</div></a>
+    <a class="city-btn" href="bologna.html"><div class="city-name">Bologna</div><div class="city-sub">Clicca per esplorare</div></a>
+    <a class="city-btn" href="firenze.html"><div class="city-name">Firenze</div><div class="city-sub">Clicca per esplorare</div></a>
+    <a class="city-btn" href="palermo.html"><div class="city-name">Palermo</div><div class="city-sub">Clicca per esplorare</div></a>
+    <a class="city-btn add" href="https://docs.google.com/forms/d/e/1FAIpQLScB3iJIX0zL6sBxBFrRuVRmksCD92bCo_WLNvfO2Ah1wg4yuA/viewform" target="_blank"><div class="city-name">+ Altra città</div><div class="city-sub">Segnalacela</div></a>
   </div>
 </div>
-
 <div class="section">
   <div class="section-header">
-    <span class="section-tag tag-forum">Forum</span>
-    <span class="section-title">Spazio di discussione anonimo</span>
+    <div class="section-header-left">
+      <span class="section-tag tag-forum">Forum</span>
+      <span class="section-title">Spazio di discussione anonimo</span>
+    </div>
   </div>
   <div class="forum-preview">
     <p>Il forum è il cuore di LavoratoriCoop.it — uno spazio anonimo dove puoi raccontare la tua esperienza, fare domande e confrontarti con altri lavoratori del sociale.</p>
     <a class="btn-primary" href="forum.html">Entra nel forum</a>
   </div>
 </div>
-
 <div class="about" id="chi-siamo">
   <div class="about-title">Chi siamo e perché esiste questo sito</div>
   <p class="about-text">LavoratoriCoop.it nasce dalla necessità concreta di chi lavora nel sociale: sapere in anticipo com'è lavorare in una cooperativa, se paga regolarmente, se rispetta i contratti. Qui puoi cercare informazioni, leggere le esperienze di chi ci ha lavorato prima di te, e condividere la tua — in anonimato totale. Il sito è costruito dai lavoratori, per i lavoratori.</p>
 </div>
-
 <div class="footer-bar">
   <span class="footer-copy">lavoratoricoop.it — progetto indipendente</span>
   <span class="footer-anon">🔒 100% anonimo nel forum</span>
 </div>
-
 </body>
 </html>
