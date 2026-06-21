@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooperative a Torino — LavoratoriCoop.it</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Space Grotesk', sans-serif; background: #1a0a2e; color: #f0e6ff; min-height: 100vh; }
+nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 2px solid #ff6b9d; background: #12071e; }
+.logo { font-family: 'Space Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #ff6b9d; letter-spacing: -1px; text-decoration: none; }
+.logo span { color: #00f5c4; }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a { color: #c9b8ff; font-size: 0.9rem; text-decoration: none; font-weight: 500; }
+.nav-links a:hover { color: #00f5c4; }
+.page-header { padding: 2rem; border-bottom: 2px solid #2d1a4e; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.page-header-left {}
+.breadcrumb { font-size: 0.78rem; color: #7a6a9e; margin-bottom: 0.8rem; }
+.breadcrumb a { color: #c9b8ff; text-decoration: none; }
+.breadcrumb a:hover { color: #00f5c4; }
+.page-header h1 { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; color: #f0e6ff; }
+.page-header h1 span { color: #ff6b9d; }
+.page-header p { color: #7a6a9e; font-size: 0.85rem; margin-top: 0.4rem; }
+.btn-primary { background: #ff6b9d; color: #12071e; padding: 0.6rem 1.2rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-block; white-space: nowrap; }
+.content { padding: 2rem; }
+.coop-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.coop-item { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 6px; padding: 1rem 1.2rem; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.2s; }
+.coop-item:hover { border-color: #ff6b9d; }
+.coop-name { font-weight: 500; font-size: 0.95rem; color: #f0e6ff; }
+.coop-link { font-size: 0.8rem; color: #00f5c4; text-decoration: none; font-weight: 700; }
+.coop-link:hover { text-decoration: underline; }
+.empty-state { text-align: center; padding: 3rem 2rem; color: #7a6a9e; border: 1px dashed #3d2a5e; border-radius: 6px; }
+.empty-state strong { color: #c9b8ff; display: block; margin-bottom: 0.5rem; font-size: 1rem; font-family: 'Space Mono', monospace; }
+.empty-state a { color: #00f5c4; text-decoration: none; }
+.empty-state a:hover { text-decoration: underline; }
+.footer-bar { background: #0a0312; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2d1a4e; margin-top: 2rem; }
+.footer-copy { font-size: 0.75rem; color: #3d2a5e; }
+.footer-anon { font-size: 0.75rem; color: #00f5c4; }
+@media (max-width: 600px) { .nav-links { display: none; } .page-header h1 { font-size: 1.3rem; } }
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">lavoratori<span>coop</span>.it</a>
+  <div class="nav-links">
+    <a href="index.html#directory">Directory</a>
+    <a href="forum.html">Forum</a>
+    <a href="index.html#chi-siamo">Chi siamo</a>
+  </div>
+</nav>
+<div class="page-header">
+  <div class="page-header-left">
+    <div class="breadcrumb"><a href="index.html">Home</a> → <a href="index.html#directory">Directory</a> → Torino</div>
+    <h1>Cooperative a <span>Torino</span></h1>
+    <p>Elenco delle cooperative sociali. Dati aggiornati dalla community.</p>
+  </div>
+  <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScB3iJIX0zL6sBxBFrRuVRmksCD92bCo_WLNvfO2Ah1wg4yuA/viewform" target="_blank">+ Segnala una cooperativa</a>
+</div>
+<div class="content">
+  <div class="coop-list">
+    <!-- COOPERATIVE_torino -->
+    <div class="empty-state">
+      <strong>Nessuna cooperativa ancora</strong>
+      Conosci una cooperativa a Torino?<br>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScB3iJIX0zL6sBxBFrRuVRmksCD92bCo_WLNvfO2Ah1wg4yuA/viewform" target="_blank">Segnalacela qui</a> — la aggiungeremo subito.
+    </div>
+  </div>
+</div>
+<div class="footer-bar">
+  <span class="footer-copy">lavoratoricoop.it — progetto indipendente</span>
+  <span class="footer-anon">🔒 100% anonimo nel forum</span>
+</div>
+</body>
+</html>
