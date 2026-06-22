@@ -2,75 +2,113 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Lavoratori Coop</title>
+<title>Roma - Cooperative Sociali</title>
+
 <style>
-body { font-family: Arial; background:#f5f5f5; margin:0; padding:20px; }
-.card { background:white; padding:15px; margin:10px 0; border-radius:10px; }
-a { color:blue; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6f8;
+}
+
+.header {
+  background: #1f4bd8;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.search {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  display: block;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+}
+
+.card a {
+  color: #1f4bd8;
+  text-decoration: none;
+}
+
+.tag {
+  font-size: 12px;
+  background: #e8eefc;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
 </style>
 </head>
 
 <body>
 
-<h1>Elenco Cooperative</h1>
+<div class="header">
+  <h1>Cooperative Sociali - Roma</h1>
+  <p>Elenco strutturato di realtà del terzo settore</p>
+</div>
 
-<div id="list"></div>
+<input class="search" id="search" placeholder="Cerca cooperativa...">
+
+<div class="container" id="list"></div>
 
 <script>
-// === 1. LISTA REALTÀ (la tua originale) ===
-const entities = [
-"Aldia Cooperativa Sociale",
-"Agorà Soc. Coop. Soc.",
-"AISS Soc. Coop.",
-"Apriti Sesamo Cooperativa Sociale",
-"Arca di Noè Cooperativa Sociale",
-"Ars Educandi",
-"Consorzio Blu",
-"Domus Cooperativa Sociale",
-"Eureka Cooperativa",
-"Kairos Cooperativa Sociale",
-"Meta Cooperativa Sociale",
-"Medihospes",
-"Parsifal",
-"Nuova SAIR",
-"Area Sociale"
+
+// 🔥 QUI INCOLLI LA TUA LISTA (già esistente)
+const data = [
+  { name: "Aldia Cooperativa Sociale", site: "https://www.aldia.it", type: "Cooperativa Sociale" },
+  { name: "Agorà Soc. Coop.", site: "https://www.agoracoop.it", type: "Cooperativa Sociale" },
+  { name: "AISS", site: "https://www.aisscoop.com", type: "Cooperativa Sociale" },
+  { name: "Apriti Sesamo", site: "https://www.apritisesamo.it", type: "Cooperativa Sociale" },
+  { name: "Arca di Noè", site: "https://www.arcadinoe.it", type: "Cooperativa Sociale" },
+  { name: "Ars Educandi", site: "https://www.arseducandi.it", type: "Cooperativa Sociale" }
 ];
 
-// === 2. CREA UI ===
-const container = document.getElementById("list");
+const list = document.getElementById("list");
 
-entities.forEach(name => {
+function render(items){
+  list.innerHTML = "";
 
-  const div = document.createElement("div");
-  div.className = "card";
+  items.forEach(e => {
+    list.innerHTML += `
+      <div class="card">
+        <span class="tag">${e.type}</span>
+        <h3>${e.name}</h3>
+        <a href="${e.site}" target="_blank">Visita sito</a>
+      </div>
+    `;
+  });
+}
 
-  div.innerHTML = `
-    <h3>${name}</h3>
-    <p class="site">🔍 Ricerca sito in corso...</p>
-  `;
+render(data);
 
-  container.appendChild(div);
-
-  // === 3. AUTO-RICERCA SITO ===
-  fetch(`https://api.allorigins.win/get?url=` +
-        encodeURIComponent("https://www.google.com/search?q=" + name + " cooperativa sociale sito ufficiale"))
-    .then(r => r.json())
-    .then(data => {
-
-      // estrazione semplice link (versione base)
-      const match = data.contents.match(/https?:\/\/(www\.)?[a-zA-Z0-9\-]+\.[a-z]{2,}/);
-
-      if (match) {
-        div.querySelector(".site").innerHTML =
-          `🌐 Sito trovato: <a href="${match[0]}" target="_blank">${match[0]}</a>`;
-      } else {
-        div.querySelector(".site").innerHTML =
-          "⚠️ Sito non trovato";
-      }
-
-    });
-
+// 🔍 ricerca
+document.getElementById("search").addEventListener("input", (e) => {
+  const value = e.target.value.toLowerCase();
+  render(data.filter(d => d.name.toLowerCase().includes(value)));
 });
+
 </script>
 
 </body>
