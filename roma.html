@@ -1,115 +1,332 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Roma - Cooperative Sociali</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organismi Sociali a Roma — LavoratoriCoop.it</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f4f6f8;
-}
-
-.header {
-  background: #1f4bd8;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-.search {
-  width: 90%;
-  max-width: 600px;
-  margin: 20px auto;
-  display: block;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 15px;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
-.card h3 {
-  margin: 0 0 10px 0;
-}
-
-.card a {
-  color: #1f4bd8;
-  text-decoration: none;
-}
-
-.tag {
-  font-size: 12px;
-  background: #e8eefc;
-  padding: 3px 8px;
-  border-radius: 6px;
-  display: inline-block;
-  margin-bottom: 8px;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Space Grotesk', sans-serif; background: #1a0a2e; color: #f0e6ff; min-height: 100vh; }
+nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 2px solid #ff6b9d; background: #12071e; }
+.logo { font-family: 'Space Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #ff6b9d; letter-spacing: -1px; text-decoration: none; }
+.logo span { color: #00f5c4; }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a { color: #c9b8ff; font-size: 0.9rem; text-decoration: none; font-weight: 500; }
+.nav-links a:hover { color: #00f5c4; }
+.page-header { padding: 2rem; border-bottom: 2px solid #2d1a4e; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.breadcrumb { font-size: 0.78rem; color: #7a6a9e; margin-bottom: 0.8rem; }
+.breadcrumb a { color: #c9b8ff; text-decoration: none; }
+.breadcrumb a:hover { color: #00f5c4; }
+.page-header h1 { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; color: #f0e6ff; }
+.page-header h1 span { color: #ff6b9d; }
+.page-header p { color: #7a6a9e; font-size: 0.85rem; margin-top: 0.4rem; }
+.btn-primary { background: #ff6b9d; color: #12071e; padding: 0.6rem 1.2rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-block; white-space: nowrap; }
+.stats-bar { display: flex; gap: 2rem; padding: 1rem 2rem; border-bottom: 1px solid #2d1a4e; background: #12071e; flex-wrap: wrap; }
+.stat-item { font-size: 0.8rem; color: #7a6a9e; }
+.stat-item strong { color: #00f5c4; font-family: 'Space Mono', monospace; font-size: 1rem; display: block; }
+.filters { padding: 1.2rem 2rem; border-bottom: 1px solid #2d1a4e; display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.filter-label { font-size: 0.75rem; color: #7a6a9e; letter-spacing: 1px; text-transform: uppercase; margin-right: 0.2rem; }
+.filter-btn { font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.7rem; border-radius: 4px; border: 1px solid #3d2a5e; background: #2d1a4e; color: #c9b8ff; cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover, .filter-btn.active { background: #ff6b9d; color: #12071e; border-color: #ff6b9d; }
+.filter-btn.fonte-active { background: #00f5c4; color: #12071e; border-color: #00f5c4; }
+.search-wrap { padding: 0.8rem 2rem; }
+.search-bar { display: flex; border: 2px solid #3d2a5e; border-radius: 6px; overflow: hidden; max-width: 500px; }
+.search-bar input { flex: 1; background: #2d1a4e; border: none; padding: 0.7rem 1rem; color: #f0e6ff; font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; outline: none; }
+.search-bar input::placeholder { color: #7a6a9e; }
+.content { padding: 0 2rem 2rem; }
+.count-label { font-size: 0.78rem; color: #7a6a9e; margin-bottom: 0.8rem; }
+.count-label span { color: #00f5c4; font-weight: 700; }
+.org-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.org-item { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 6px; padding: 0.85rem 1.2rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; transition: border-color 0.2s; }
+.org-item:hover { border-color: #ff6b9d; }
+.org-name { font-weight: 500; font-size: 0.9rem; color: #f0e6ff; flex: 1; min-width: 180px; }
+.badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.badge { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 0.15rem 0.45rem; border-radius: 2px; white-space: nowrap; }
+.b-ruas { background: #003d2e; color: #00f5c4; }
+.b-ruc { background: #1a0a4e; color: #c9b8ff; }
+.b-coop { background: #3d0a2e; color: #ff6b9d; }
+.b-consorzio { background: #2d1a00; color: #ffd166; }
+.b-ass { background: #001a3d; color: #6bb8ff; }
+.b-fond { background: #1a001a; color: #d166ff; }
+.b-rel { background: #1a1a00; color: #c8ff66; }
+.org-link { font-size: 0.78rem; color: #00f5c4; text-decoration: none; font-weight: 700; white-space: nowrap; margin-left: auto; }
+.org-link:hover { text-decoration: underline; }
+.org-no-link { font-size: 0.78rem; color: #3d2a5e; white-space: nowrap; margin-left: auto; }
+.footer-bar { background: #0a0312; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2d1a4e; margin-top: 2rem; }
+.footer-copy { font-size: 0.75rem; color: #3d2a5e; }
+.footer-anon { font-size: 0.75rem; color: #00f5c4; }
+@media (max-width: 600px) { .nav-links { display: none; } .page-header h1 { font-size: 1.3rem; } .org-item { flex-direction: column; align-items: flex-start; } .org-link, .org-no-link { margin-left: 0; } }
 </style>
 </head>
-
 <body>
-
-<div class="header">
-  <h1>Cooperative Sociali - Roma</h1>
-  <p>Elenco strutturato di realtà del terzo settore</p>
+<nav>
+  <a class="logo" href="index.html">lavoratori<span>coop</span>.it</a>
+  <div class="nav-links">
+    <a href="index.html#directory">Directory</a>
+    <a href="forum.html">Forum</a>
+    <a href="index.html#chi-siamo">Chi siamo</a>
+  </div>
+</nav>
+<div class="page-header">
+  <div>
+    <div class="breadcrumb"><a href="index.html">Home</a> → <a href="index.html#directory">Directory</a> → Roma</div>
+    <h1>Organismi sociali a <span>Roma</span></h1>
+    <p>Fonti: RUAS 2024/2027 e RUC febbraio 2021 — Comune di Roma Capitale</p>
+  </div>
+  <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScB3iJIX0zL6sBxBFrRuVRmksCD92bCo_WLNvfO2Ah1wg4yuA/viewform" target="_blank">+ Segnala un organismo</a>
 </div>
-
-<input class="search" id="search" placeholder="Cerca cooperativa...">
-
-<div class="container" id="list"></div>
-
+<div class="stats-bar">
+  <div class="stat-item"><strong>180</strong>organismi totali</div>
+  <div class="stat-item"><strong>131</strong>cooperative sociali</div>
+  <div class="stat-item"><strong>35</strong>associazioni</div>
+  <div class="stat-item"><strong>7</strong>consorzi</div>
+  <div class="stat-item"><strong>6</strong>fondazioni</div>
+  <div class="stat-item"><strong>2</strong>enti religiosi</div>
+</div>
+<div class="filters">
+  <span class="filter-label">Tipo:</span>
+  <button class="filter-btn active" onclick="filterType('tutti', this)">Tutti</button>
+  <button class="filter-btn" onclick="filterType('Coop. Sociale', this)">Cooperative Sociali</button>
+  <button class="filter-btn" onclick="filterType('Consorzio', this)">Consorzi</button>
+  <button class="filter-btn" onclick="filterType('Associazione', this)">Associazioni</button>
+  <button class="filter-btn" onclick="filterType('Fondazione', this)">Fondazioni</button>
+  <button class="filter-btn" onclick="filterType('Ente Religioso', this)">Enti Religiosi</button>
+  <span class="filter-label" style="margin-left:0.8rem">Fonte:</span>
+  <button class="filter-btn" id="btn-ruas" onclick="toggleFonte('RUAS')">RUAS</button>
+  <button class="filter-btn" id="btn-ruc" onclick="toggleFonte('RUC')">RUC</button>
+</div>
+<div class="search-wrap">
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Cerca per nome..." oninput="applyFilters()" />
+  </div>
+</div>
+<div class="content">
+  <div class="count-label">Risultati: <span id="countLabel">180</span></div>
+  <div class="org-list" id="orgList">
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">A.A.D.I.S. Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">A.B.C. Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUAS+RUC"><span class="org-name">A.N.A.F.I. Associazione ETS</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">A.P.C.A. - Ass. Psicologia Clinica Applicata Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">aCapo Soc. Coop. Soc. Integrata</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.capodarcoroma.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">Aelle Il Punto Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">Agape Coop.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">Agora' Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.agoragroup.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">AISS Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.aisscoop.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">Al Parco Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.coopalparco.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">ALDIA Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">ALFA SMILE Cooperativa Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">ALTRI PIANETI Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">ANCHISE Cooperativa Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">ANVER Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">APRITI SESAMO Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.apritisesamo.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">ARCA Cooperativa Servizi Socio Sanitari Domiciliari e Residenziali</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">ARCA DI NOE' Cooperativa Sociale ETS</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.arcadinoe.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Fondazione" data-fonte="RUC"><span class="org-name">ARCHE' FONDAZIONE Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-fond">Fondazione</span></div><a class="org-link" href="https://www.arche.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">ARCI SOLIDARIETA' Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">ARCOBALENO 2 Soc. Coop. Sociale per Azioni Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">AREA SOCIALE Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.areasociale.coop" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">ARS EDUCANDI Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">ARTICOLO NOVE Ass. Culturale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">ASPIC Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.coopaspic.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">ASS. DELLA CROCE ROSSA ITALIANA - Area Metropolitana di Roma</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">ASSISTENZA E TERRITORIO Soc. Coop.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.assistenza-territorio.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">ASSOCIAZIONE 1-2-3 STELLA</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUAS"><span class="org-name">ASSOCIAZIONE EDUCATIVA PEDAGOGICA PETRARCA APS</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">ASSOCIAZIONE YLENIA E GLI AMICI SPECIALI Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">AURORA Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">AUTONOMA-MENTE Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.autonomamente.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">AUXILIUM Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.coopauxilium.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">AZZURRA 84 Soc. Coop. Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">BAMBINI NEL TEMPO Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">BENESSERE Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Ente Religioso" data-fonte="RUC"><span class="org-name">BORGO RAGAZZI DON BOSCO - Centro Orientamento Lavoro</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-rel">Ente Religioso</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">BOTTEGA SOLIDALE Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.bottegasolidale.net" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">C.E.R.F. Centro Ricerche sulla Famiglia Ass.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">C.I.R. Soc. Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">C.N.A. - Centro Nuovo Apprendimento Soc. Coop.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">C.O.E.S. Centro di Occupazione e Educazione per Subnormali Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><a class="org-link" href="https://www.coesonlus.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">C.R.S. Cooperativa Roma Solidarieta'</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">CASA COMUNE 2000 Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">CASSIAVASS Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">CECILIA Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.ceciliacoop.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">CEMEA DEL MEZZOGIORNO Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">CENTRO ALFREDO RAMPI Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">CENTRO ITALIANO DI SOLIDARIETA' DON MARIO PICCHI Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><a class="org-link" href="https://www.ceis.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">CERALACCA Cooperativa Sociale ETS</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">COMUNITA' S. EGIDIO - ACAP Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Consorzio" data-fonte="RUAS"><span class="org-name">CONSORZIO BLU</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-consorzio">Consorzio</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Consorzio" data-fonte="RUAS+RUC"><span class="org-name">CONSORZIO SOLIDARIETA' SOCIALE Soc. Coop. Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-consorzio">Consorzio</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Consorzio" data-fonte="RUAS"><span class="org-name">CONSORZIO UMANA SOLIDARIETA'</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-consorzio">Consorzio</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Consorzio" data-fonte="RUC"><span class="org-name">CONSORZIO VALCOMINO Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-consorzio">Consorzio</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">COOPERATIVA SOCIALE SPES CONTRA SPEM</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.spescontraspem.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">COSPEXA Soc. Coop.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">COTRAD Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">DIDASCO Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.didascoriabilitazione.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">DIVERSAMENTE Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">DOMI GROUP Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">DOMUS Cooperativa Sociale ARL</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">EQUIPE Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Consorzio" data-fonte="RUC"><span class="org-name">ERICHES 29 - Consorzio di Coop. Sociali</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-consorzio">Consorzio</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">ERMES Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.ermescooperativa.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">ETA BETA Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">EUREKA I Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.eurekaprimo.net" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">EUREKA Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">EUROPA Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">EUROPE CONSULTING Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">EVERGREEN Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">F.A.I. - Famiglie Anziani Infanzia Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.coopfairoma.com" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUAS"><span class="org-name">FIADDA ROMA ONLUS</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">FOGLIE D'ALBERO Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.fogliedalbero.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Fondazione" data-fonte="RUC"><span class="org-name">FONDAZIONE ALBERO DELLA VITA</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-fond">Fondazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Fondazione" data-fonte="RUAS+RUC"><span class="org-name">FONDAZIONE INCLUSIONE SALUTE E CURA ROMA LITORALE</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-fond">Fondazione</span></div><a class="org-link" href="https://www.fondazionerml.com" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Fondazione" data-fonte="RUC"><span class="org-name">FONDAZIONE SILVANO ANDOLFI</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-fond">Fondazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Fondazione" data-fonte="RUC"><span class="org-name">FONDAZIONE VILLA MARAINI Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-fond">Fondazione</span></div><a class="org-link" href="https://www.villamaraini.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">FORMULA SOCIALE Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">FUTURA Coop. Sociale Sociosanitaria Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.coopfutura.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">GAIA Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.coopgaia.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">GMA Cooperativa Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">GRIMALDI Coop. Soc. Socio Sanitaria Integrata</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">H ANNO ZERO Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">HAGAPE 2000 Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">HARMONIA Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">I FRUTTI DI ANDREA Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">I.S.S.A.S. Istituto Superiore Studi e Ricerca Assistenza Sociale e Sanitaria Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">I.SO.LA Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">IBIS Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.ibiscoop.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">IDEA PRISMA '82 Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.ideaprisma.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">IL BRUTTO ANATROCCOLO Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.anatro.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">IL CAMMINO Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">IL CIGNO Soc. Coop. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">IL FILO DALLA TORRE Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">IL PROGRESSO Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">IL RAGGIO Soc. Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.ilraggioonlus.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">IL TAMBURO Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">INOPERA Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.inoperacoop.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">ISKRA Coop. Socio Sanitaria</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.iskra.coop" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Ente Religioso" data-fonte="RUC"><span class="org-name">ISTITUTO OPERA DON CALABRIA</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-rel">Ente Religioso</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">ITINERA Cooperativa Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">KAIROS MURIALDO Ass. di Promozione Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">KAIROS Societa' Cooperativa Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">LA MAISON Ass. di Promozione Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">LA MERIDIANA Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">LA RAGNATELA Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.laragnatela.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">LA SPONDA Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">LANTERNA DI DIOGENE Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.lanternadidiogene.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">LE MILLE E UNA NOTTE Soc. Coop.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.lemilleunanotte.coop" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">LO SMERALDO Coop. Soc.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">MAGLIANA 80 Soc. Coop.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">MAGLIANA SOLIDALE Soc. Coop.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.maglianasolidale.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">MASSIMILIANO KOLBE Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">MEDIHOSPES Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.medihospes.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">MEN AT WORK Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">META Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.meta.coop" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">MIO FRATELLO E' FIGLIO UNICO Cooperativa Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.miofratellofigliounico.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUAS"><span class="org-name">MIRJAC ONLUS</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ass">Associazione</span></div><a class="org-link" href="https://www.mirjac.eu" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">MIRJAC Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.mirjac.eu" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">MO.D.A.V.I. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUAS"><span class="org-name">NASCE UN SORRISO</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">NICODEMO Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">NOINSIEME Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">NUOVA SAIR Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.nuovasair.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">NUOVA SOCIALITA' Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.nuovasocialita.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">NUOVE RISPOSTE Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.nuoverisposte.coop" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">NUOVI ORIZZONTI Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.nuoviorizzontionlus.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">O.S.A. Operatori Sanitari Associati Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.osa.coop" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">OASI FEDERICO ROMA Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">OBIETTIVO UOMO Soc. Coop. Soc. ETS</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">OFFICINA LIBERA Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">OFORULA Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">OLTRE Soc. Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">OPERA SANTE DE SANCTIS Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PANDORA Soc. Coop. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PANTA REI Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.coop-pantarei.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PARSEC Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Consorzio" data-fonte="RUAS"><span class="org-name">PARSIFAL - Consorzio di Cooperative Sociali</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-consorzio">Consorzio</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PATATRAC Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.patatrac.net" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PEGASO Coop. Sociale Integrata</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.cooperativapegaso.info" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PERCORSI ZEBRATI Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PERLA Soc. Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.perlaonlus.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">PLUTONE Societa' Coop. Sociale ETS</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PM1 Cooperativa Soc. di Servizi Socio Sanitari ed Educativi</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">PRASSI E RICERCA Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">PRESENZA SOCIALE Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">PREVENZIONE ED INTERVENTO ROMA 81 Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.roma81.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PROGETTO 96 Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.progetto96.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">PROGETTO A Soc. Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Fondazione" data-fonte="RUC"><span class="org-name">PROGETTO ARCA FONDAZIONE Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-fond">Fondazione</span></div><a class="org-link" href="https://www.progettoarca.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PROGETTO SALUTE Soc. Coop.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">PROGRAMMA INTEGRA Soc. Coop. Soc.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.programmaintegra.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">PSICO SOCIO SANITARIO Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">QUALITY LIFE ASSOCIATION Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">R.O.M.A. Research Office in Medicine and Assistance</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.cooproma.coop" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">RIFORNIMENTO IN VOLO Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">RISVOLTI Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">S. ONOFRIO Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.sonofrio.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">S. SATURNINO Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.sansaturnino.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">SADIFOR Soc. Coop.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">SALUTE E BENESSERE Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUC"><span class="org-name">SAVE THE CHILDREN ITALIA Ass. Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-ass">Associazione</span></div><a class="org-link" href="https://www.savethechildren.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">SEGNI DI INTEGRAZIONE LAZIO Cooperativa Sociale</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">SERIANA 2000 Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">SERVIZIO PSICO SOCIO SANITARIO Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">SERVIZIO SOCIALE E SANITARIO XIX Soc. Coop.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">SIAR Soc. Coop. Sociale</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.siarservizisanitari.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">SIRIO</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">SOCIO SANITARIA FUTURA Soc. Coop. Soc. Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.coopfutura.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">SOLE LUNA Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.solelunaonlus.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS"><span class="org-name">SOLIDARIETA' Soc. Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Associazione" data-fonte="RUAS"><span class="org-name">SORRISO ALFA</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ass">Associazione</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">SORRISO PER TUTTI Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">SS. PIETRO E PAOLO Coop. Soc.</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.santipietroepaolo.it" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Consorzio" data-fonte="RUAS"><span class="org-name">TIRESIA Consorzio Sociale di Solidarietà</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-consorzio">Consorzio</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUAS+RUC"><span class="org-name">TUTTI GIU' PER TERRA Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruas">RUAS</span><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><a class="org-link" href="https://www.tuttigiuperterra.org" target="_blank">→ sito web</a></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">UN SORRISO Soc. Coop. Sociale Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">VIRTUS ROMA Soc. Coop. Sociale Integrata Onlus</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+<div class="org-item" data-tipo="Coop. Sociale" data-fonte="RUC"><span class="org-name">ZINGARI 59 Coop.</span><div class="badges"><span class="badge b-ruc">RUC</span><span class="badge b-coop">Coop. Sociale</span></div><span class="org-no-link">sito non disponibile</span></div>
+  </div>
+</div>
+<div class="footer-bar">
+  <span class="footer-copy">lavoratoricoop.it — progetto indipendente</span>
+  <span class="footer-anon">🔒 100% anonimo nel forum</span>
+</div>
 <script>
-
-// 🔥 QUI INCOLLI LA TUA LISTA (già esistente)
-const data = [
-  { name: "Aldia Cooperativa Sociale", site: "https://www.aldia.it", type: "Cooperativa Sociale" },
-  { name: "Agorà Soc. Coop.", site: "https://www.agoracoop.it", type: "Cooperativa Sociale" },
-  { name: "AISS", site: "https://www.aisscoop.com", type: "Cooperativa Sociale" },
-  { name: "Apriti Sesamo", site: "https://www.apritisesamo.it", type: "Cooperativa Sociale" },
-  { name: "Arca di Noè", site: "https://www.arcadinoe.it", type: "Cooperativa Sociale" },
-  { name: "Ars Educandi", site: "https://www.arseducandi.it", type: "Cooperativa Sociale" }
-];
-
-const list = document.getElementById("list");
-
-function render(items){
-  list.innerHTML = "";
-
-  items.forEach(e => {
-    list.innerHTML += `
-      <div class="card">
-        <span class="tag">${e.type}</span>
-        <h3>${e.name}</h3>
-        <a href="${e.site}" target="_blank">Visita sito</a>
-      </div>
-    `;
-  });
+let currentType = 'tutti';
+let activeFonti = [];
+function filterType(tipo, btn) {
+  currentType = tipo;
+  document.querySelectorAll('.filters .filter-btn').forEach(b => { if (!b.id) b.classList.remove('active'); });
+  btn.classList.add('active');
+  applyFilters();
 }
-
-render(data);
-
-// 🔍 ricerca
-document.getElementById("search").addEventListener("input", (e) => {
-  const value = e.target.value.toLowerCase();
-  render(data.filter(d => d.name.toLowerCase().includes(value)));
-});
-
+function toggleFonte(fonte) {
+  const btn = document.getElementById('btn-' + fonte.toLowerCase());
+  if (activeFonti.includes(fonte)) {
+    activeFonti = activeFonti.filter(f => f !== fonte);
+    btn.classList.remove('fonte-active');
+  } else {
+    activeFonti.push(fonte);
+    btn.classList.add('fonte-active');
+  }
+  applyFilters();
+}
+function applyFilters() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const items = document.querySelectorAll('.org-item');
+  let count = 0;
+  items.forEach(item => {
+    const name = item.querySelector('.org-name').textContent.toLowerCase();
+    const tipo = item.dataset.tipo;
+    const fonte = item.dataset.fonte;
+    const matchType = currentType === 'tutti' || tipo === currentType;
+    const matchFonte = activeFonti.length === 0 || activeFonti.some(f => fonte.includes(f));
+    const matchSearch = name.includes(query);
+    if (matchType && matchFonte && matchSearch) { item.style.display = 'flex'; count++; }
+    else { item.style.display = 'none'; }
+  });
+  document.getElementById('countLabel').textContent = count;
+}
 </script>
-
 </body>
 </html>
