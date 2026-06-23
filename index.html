@@ -21,11 +21,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .hero h1 .accent { color: #00f5c4; }
 .hero h1 .accent2 { color: #ff6b9d; }
 .hero-sub { font-size: 1rem; color: #c9b8ff; max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
-.search-bar { display: flex; max-width: 500px; margin: 0 auto 1.5rem; border: 2px solid #00f5c4; border-radius: 6px; overflow: hidden; }
-.search-bar input { flex: 1; background: #2d1a4e; border: none; padding: 0.8rem 1rem; color: #f0e6ff; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; outline: none; }
-.search-bar input::placeholder { color: #7a6a9e; }
-.search-bar button { background: #00f5c4; color: #12071e; border: none; padding: 0 1.4rem; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
-.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 .btn-primary { background: #ff6b9d; color: #12071e; border: none; padding: 0.7rem 1.6rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-block; }
 .btn-outline { background: transparent; color: #00f5c4; border: 2px solid #00f5c4; padding: 0.65rem 1.6rem; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-block; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 2px solid #2d1a4e; }
@@ -42,13 +38,14 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .section-title { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; color: #f0e6ff; }
 .btn-small { font-size: 0.75rem; padding: 0.35rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 700; background: transparent; color: #ff6b9d; border: 1px solid #ff6b9d; white-space: nowrap; }
 .btn-small:hover { background: #ff6b9d; color: #12071e; }
-.city-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.7rem; }
+.city-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.7rem; margin-bottom: 1.5rem; }
 .city-btn { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 4px; padding: 0.8rem; text-align: center; transition: all 0.2s; text-decoration: none; display: block; }
 .city-btn:hover { border-color: #ff6b9d; background: #3d1a3e; }
-.city-btn.add { border-style: dashed; border-color: #ff6b9d; }
-.city-btn.add:hover { background: #2d0a1e; }
 .city-name { font-weight: 700; font-size: 0.9rem; color: #f0e6ff; }
 .city-sub { font-size: 0.72rem; color: #7a6a9e; margin-top: 0.2rem; }
+.segnala-bar { display: flex; align-items: center; justify-content: space-between; background: #2d1a4e; border: 1px dashed #ff6b9d; border-radius: 6px; padding: 1rem 1.4rem; flex-wrap: wrap; gap: 1rem; }
+.segnala-text { font-size: 0.9rem; color: #c9b8ff; }
+.segnala-text strong { color: #f0e6ff; }
 .forum-preview { background: #2d1a4e; border: 1px solid #3d2a5e; border-radius: 6px; padding: 1.5rem; text-align: center; }
 .forum-preview p { color: #c9b8ff; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.6; }
 .about { padding: 2rem; background: #12071e; }
@@ -57,7 +54,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .footer-bar { background: #0a0312; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2d1a4e; }
 .footer-copy { font-size: 0.75rem; color: #3d2a5e; }
 .footer-anon { font-size: 0.75rem; color: #00f5c4; }
-@media (max-width: 600px) { .hero h1 { font-size: 1.6rem; } .nav-links { display: none; } }
+@media (max-width: 600px) { .hero h1 { font-size: 1.6rem; } .nav-links { display: none; } .segnala-bar { flex-direction: column; align-items: flex-start; } }
 </style>
 </head>
 <body>
@@ -69,31 +66,29 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
     <a href="#chi-siamo">Chi siamo</a>
   </div>
 </nav>
+
 <div class="hero">
   <div class="hero-badge">per chi lavora nel sociale</div>
   <h1>Conosci<br>la tua <span class="accent">cooperativa</span><br>prima di <span class="accent2">firmare</span></h1>
   <p class="hero-sub">Directory aggiornata di cooperative sociali, recensioni anonime di chi ci lavora davvero, e un forum libero per confrontarsi.</p>
-  <div class="search-bar">
-    <input type="text" placeholder="Cerca una cooperativa o una città..." />
-    <button>Cerca</button>
-  </div>
   <div class="hero-actions">
     <a class="btn-primary" href="#directory">Sfoglia la directory</a>
     <a class="btn-outline" href="forum.html">Vai al forum</a>
   </div>
 </div>
+
 <div class="stats">
-  <div class="stat"><div class="stat-num">180</div><div class="stat-label">Organismi sociali</div></div>
+  <div class="stat"><div class="stat-num">190</div><div class="stat-label">Organismi sociali</div></div>
   <div class="stat"><div class="stat-num">0</div><div class="stat-label">Forum</div></div>
   <div class="stat"><div class="stat-num">7</div><div class="stat-label">Città</div></div>
 </div>
+
 <div class="section" id="directory">
   <div class="section-header">
     <div class="section-header-left">
       <span class="section-tag tag-city">Directory</span>
       <span class="section-title">Sfoglia per città</span>
     </div>
-    <a class="btn-small" href="https://docs.google.com/forms/d/e/1FAIpQLScB3iJIX0zL6sBxBFrRuVRmksCD92bCo_WLNvfO2Ah1wg4yuA/viewform" target="_blank">+ Segnala una coop</a>
   </div>
   <div class="city-grid">
     <a class="city-btn" href="milano.html"><div class="city-name">Milano</div><div class="city-sub">Clicca per esplorare</div></a>
@@ -103,9 +98,13 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
     <a class="city-btn" href="bologna.html"><div class="city-name">Bologna</div><div class="city-sub">Clicca per esplorare</div></a>
     <a class="city-btn" href="firenze.html"><div class="city-name">Firenze</div><div class="city-sub">Clicca per esplorare</div></a>
     <a class="city-btn" href="palermo.html"><div class="city-name">Palermo</div><div class="city-sub">Clicca per esplorare</div></a>
-    <a class="city-btn add" href="https://docs.google.com/forms/d/e/1FAIpQLScB3iJIX0zL6sBxBFrRuVRmksCD92bCo_WLNvfO2Ah1wg4yuA/viewform" target="_blank"><div class="city-name">+ Altra città</div><div class="city-sub">Segnalacela</div></a>
+  </div>
+  <div class="segnala-bar">
+    <span class="segnala-text"><strong>Non trovi la tua cooperativa?</strong> Aiutaci ad arricchire la directory segnalando un organismo mancante.</span>
+    <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScB3iJIX0zL6sBxBFrRuVRmksCD92bCo_WLNvfO2Ah1wg4yuA/viewform" target="_blank">Segnala un organismo</a>
   </div>
 </div>
+
 <div class="section">
   <div class="section-header">
     <div class="section-header-left">
@@ -118,10 +117,12 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
     <a class="btn-primary" href="forum.html">Entra nel forum</a>
   </div>
 </div>
+
 <div class="about" id="chi-siamo">
   <div class="about-title">Chi siamo e perché esiste questo sito</div>
   <p class="about-text">LavoratoriCoop.it nasce dalla necessità concreta di chi lavora nel sociale: sapere in anticipo com'è lavorare in una cooperativa, se paga regolarmente, se rispetta i contratti. Qui puoi cercare informazioni, leggere le esperienze di chi ci ha lavorato prima di te, e condividere la tua — in anonimato totale. Il sito è costruito dai lavoratori, per i lavoratori.</p>
 </div>
+
 <div class="footer-bar">
   <span class="footer-copy">lavoratoricoop.it — progetto indipendente - Realizzato da Capa</span>
   <span class="footer-anon">🔒 100% anonimo nel forum</span>
